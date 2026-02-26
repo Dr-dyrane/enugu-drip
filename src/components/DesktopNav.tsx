@@ -1,4 +1,5 @@
 import { Search, Bell, Camera, MapPin } from 'lucide-react';
+import ThemeToggle from './ThemeToggle';
 
 const DesktopNav = () => {
   return (
