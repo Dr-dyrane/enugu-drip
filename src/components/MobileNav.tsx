@@ -28,7 +28,7 @@ const MobileNav = ({ activeTab, onTabChange }: MobileNavProps) => {
                 <Menu className="w-5 h-5 text-foreground" />
               </button>
             </SheetTrigger>
-            <SheetContent side="left" className="bg-background/95 backdrop-blur-xl border-none w-80">
+            <SheetContent side="left" className="bg-background/95 backdrop-blur-xl w-80">
               <SheetHeader>
                 <SheetTitle className="font-editorial text-2xl text-foreground">DRIP</SheetTitle>
               </SheetHeader>
@@ -110,7 +110,7 @@ const ProfileSection = () => (
         { label: 'Build', value: 'Not set' },
         { label: 'Shoulders', value: 'Not set' },
       ].map(({ label, value }) => (
-        <div key={label} className="flex justify-between py-3 border-b border-secondary">
+        <div key={label} className="flex justify-between py-3 border-b-0">
           <span className="text-sm text-foreground">{label}</span>
           <span className="text-sm text-muted-foreground">{value}</span>
         </div>
@@ -120,7 +120,7 @@ const ProfileSection = () => (
     <div className="space-y-1">
       <p className="text-utility text-muted-foreground mb-3">QUICK LINKS</p>
       {['Saved Items', 'Order History', 'Nearby Vendors', 'Settings'].map((link) => (
-        <button key={link} className="w-full text-left py-3 text-sm text-foreground hover:text-primary transition-colors border-b border-secondary">
+        <button key={link} className="w-full text-left py-3 text-sm text-foreground hover:text-primary transition-colors">
           {link}
         </button>
       ))}

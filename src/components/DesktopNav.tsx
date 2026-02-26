@@ -1,4 +1,5 @@
 import { Search, Bell, Camera, MapPin } from 'lucide-react';
+import ThemeToggle from './ThemeToggle';
 
 const DesktopNav = () => {
   return (
@@ -48,6 +49,7 @@ const DesktopNav = () => {
               <Camera className="w-4 h-4 text-drip-acid" />
               <span className="text-utility text-drip-acid">SCAN</span>
             </button>
+            <ThemeToggle />
           </div>
         </div>
       </div>
