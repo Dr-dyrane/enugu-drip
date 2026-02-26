@@ -1,4 +1,6 @@
 export type ProductStatus = 'new-drop' | 'high-demand' | 'style-match';
+export type Gender = 'men' | 'women' | 'unisex';
+export type Category = 'all' | 'outerwear' | 'tops' | 'bottoms' | 'shirts' | 'dresses' | 'accessories' | 'footwear';
 
 export interface Product {
   id: string;
@@ -9,9 +11,22 @@ export interface Product {
   originalPrice?: number;
   image: string;
   status: ProductStatus;
-  category: string;
+  category: Category;
+  gender: Gender;
   size?: string;
+  tags?: string[];
 }
+
+export const categories: { id: Category; label: string }[] = [
+  { id: 'all', label: 'All' },
+  { id: 'outerwear', label: 'Outerwear' },
+  { id: 'tops', label: 'Tops' },
+  { id: 'bottoms', label: 'Bottoms' },
+  { id: 'shirts', label: 'Shirts' },
+  { id: 'dresses', label: 'Dresses' },
+  { id: 'accessories', label: 'Accessories' },
+  { id: 'footwear', label: 'Footwear' },
+];
 
 export const products: Product[] = [
   {
@@ -23,8 +38,10 @@ export const products: Product[] = [
     originalPrice: 45000,
     image: 'https://images.unsplash.com/photo-1551028719-00167b16eac5?w=800&q=80',
     status: 'new-drop',
-    category: 'Outerwear',
+    category: 'outerwear',
+    gender: 'men',
     size: 'L',
+    tags: ['leather', 'vintage', 'bomber'],
   },
   {
     id: '2',
@@ -35,8 +52,10 @@ export const products: Product[] = [
     originalPrice: 28000,
     image: 'https://images.unsplash.com/photo-1576995853123-5a10305d93c0?w=800&q=80',
     status: 'high-demand',
-    category: 'Jackets',
+    category: 'outerwear',
+    gender: 'unisex',
     size: 'M',
+    tags: ['denim', 'distressed'],
   },
   {
     id: '3',
@@ -46,8 +65,10 @@ export const products: Product[] = [
     price: 2800,
     image: 'https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=800&q=80',
     status: 'style-match',
-    category: 'Tops',
+    category: 'tops',
+    gender: 'unisex',
     size: 'XL',
+    tags: ['graphic', 'oversized', 'streetwear'],
   },
   {
     id: '4',
@@ -58,8 +79,10 @@ export const products: Product[] = [
     originalPrice: 22000,
     image: 'https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=800&q=80',
     status: 'new-drop',
-    category: 'Bottoms',
+    category: 'bottoms',
+    gender: 'women',
     size: 'M',
+    tags: ['pleated', 'wide-leg', 'elegant'],
   },
   {
     id: '5',
@@ -70,8 +93,10 @@ export const products: Product[] = [
     originalPrice: 35000,
     image: 'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=800&q=80',
     status: 'high-demand',
-    category: 'Outerwear',
+    category: 'outerwear',
+    gender: 'men',
     size: 'L',
+    tags: ['retro', 'track', 'sportswear'],
   },
   {
     id: '6',
@@ -81,8 +106,10 @@ export const products: Product[] = [
     price: 3800,
     image: 'https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=800&q=80',
     status: 'style-match',
-    category: 'Shirts',
+    category: 'shirts',
+    gender: 'men',
     size: 'S',
+    tags: ['corduroy', 'button-down', 'classic'],
   },
   {
     id: '7',
@@ -93,8 +120,10 @@ export const products: Product[] = [
     originalPrice: 18000,
     image: 'https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?w=800&q=80',
     status: 'new-drop',
-    category: 'Bottoms',
+    category: 'bottoms',
+    gender: 'unisex',
     size: 'L',
+    tags: ['cargo', 'utility', 'streetwear'],
   },
   {
     id: '8',
@@ -105,8 +134,117 @@ export const products: Product[] = [
     originalPrice: 65000,
     image: 'https://images.unsplash.com/photo-1539533113208-f6df8cc8b543?w=800&q=80',
     status: 'high-demand',
-    category: 'Outerwear',
+    category: 'outerwear',
+    gender: 'men',
     size: 'XL',
+    tags: ['wool', 'overcoat', 'luxury'],
+  },
+  {
+    id: '9',
+    name: 'Floral Midi Dress',
+    vendor: 'Ada Bespoke Corner',
+    location: 'Abakpa Market',
+    price: 5200,
+    originalPrice: 32000,
+    image: 'https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=800&q=80',
+    status: 'new-drop',
+    category: 'dresses',
+    gender: 'women',
+    size: 'M',
+    tags: ['floral', 'midi', 'summer'],
+  },
+  {
+    id: '10',
+    name: 'Satin Slip Dress',
+    vendor: 'Nneka Fashion Spot',
+    location: 'New Haven Market',
+    price: 6800,
+    originalPrice: 40000,
+    image: 'https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=800&q=80',
+    status: 'high-demand',
+    category: 'dresses',
+    gender: 'women',
+    size: 'S',
+    tags: ['satin', 'slip', 'evening'],
+  },
+  {
+    id: '11',
+    name: 'Chunky Platform Boots',
+    vendor: 'Emeka Drip Store',
+    location: 'Gariki Market',
+    price: 7500,
+    originalPrice: 48000,
+    image: 'https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=800&q=80',
+    status: 'style-match',
+    category: 'footwear',
+    gender: 'women',
+    size: '39',
+    tags: ['boots', 'platform', 'chunky'],
+  },
+  {
+    id: '12',
+    name: 'Retro Aviator Sunglasses',
+    vendor: 'Obinna Sportswear',
+    location: 'Ogbete Main Market',
+    price: 2200,
+    image: 'https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=800&q=80',
+    status: 'new-drop',
+    category: 'accessories',
+    gender: 'unisex',
+    tags: ['sunglasses', 'aviator', 'retro'],
+  },
+  {
+    id: '13',
+    name: 'Canvas High-Top Sneakers',
+    vendor: 'Chidi Vintage Hub',
+    location: 'New Haven Market',
+    price: 4500,
+    originalPrice: 25000,
+    image: 'https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?w=800&q=80',
+    status: 'high-demand',
+    category: 'footwear',
+    gender: 'unisex',
+    size: '43',
+    tags: ['sneakers', 'canvas', 'high-top'],
+  },
+  {
+    id: '14',
+    name: 'Silk Blouse',
+    vendor: 'Ada Bespoke Corner',
+    location: 'Abakpa Market',
+    price: 3500,
+    originalPrice: 20000,
+    image: 'https://images.unsplash.com/photo-1564257631407-4deb1f99d992?w=800&q=80',
+    status: 'style-match',
+    category: 'tops',
+    gender: 'women',
+    size: 'M',
+    tags: ['silk', 'blouse', 'elegant'],
+  },
+  {
+    id: '15',
+    name: 'Vintage Leather Belt',
+    vendor: 'Mama Nkechi Collections',
+    location: 'Ogbete Main Market',
+    price: 1800,
+    image: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=800&q=80',
+    status: 'new-drop',
+    category: 'accessories',
+    gender: 'unisex',
+    tags: ['belt', 'leather', 'vintage'],
+  },
+  {
+    id: '16',
+    name: 'Linen Summer Shirt',
+    vendor: 'Emeka Drip Store',
+    location: 'Gariki Market',
+    price: 3200,
+    image: 'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=800&q=80',
+    status: 'style-match',
+    category: 'shirts',
+    gender: 'men',
+    size: 'L',
+    tags: ['linen', 'summer', 'casual'],
   },
 ];
 
