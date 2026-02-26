@@ -7,13 +7,15 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@/components/ui/sheet';
+import BrandLogo from './BrandLogo';
 
 interface MobileNavProps {
   activeTab: NavTab;
   onTabChange: (tab: NavTab) => void;
+  onScanOpen: () => void;
 }
 
-const MobileNav = ({ activeTab, onTabChange }: MobileNavProps) => {
+const MobileNav = ({ activeTab, onTabChange, onScanOpen }: MobileNavProps) => {
   return (
     <>
       {/* Top Hub */}
@@ -29,7 +31,9 @@ const MobileNav = ({ activeTab, onTabChange }: MobileNavProps) => {
             <SheetContent side="left" className="bg-background/95 backdrop-blur-xl w-80 border-none p-0 overflow-y-auto">
               <div className="p-6">
                 <SheetHeader className="mb-8">
-                  <SheetTitle className="font-editorial text-3xl text-foreground text-left">DRIP</SheetTitle>
+                  <SheetTitle className="text-left">
+                    <BrandLogo className="h-8" />
+                  </SheetTitle>
                 </SheetHeader>
                 <ProfileSection />
               </div>
@@ -38,9 +42,9 @@ const MobileNav = ({ activeTab, onTabChange }: MobileNavProps) => {
         </div>
 
         {/* Center: Logo */}
-        <h1 className="font-editorial text-xl font-bold text-foreground tracking-wider" onClick={() => onTabChange('feed')}>
-          DRIP
-        </h1>
+        <div onClick={() => onTabChange('feed')} className="cursor-pointer">
+          <BrandLogo className="h-6" />
+        </div>
 
         {/* Right: Search + Notifications */}
         <div className="flex items-center gap-2">
@@ -67,8 +71,8 @@ const MobileNav = ({ activeTab, onTabChange }: MobileNavProps) => {
               key={id}
               onClick={() => onTabChange(id)}
               className={`flex items-center gap-1.5 px-4 py-2.5 rounded-full transition-all duration-300 ${activeTab === id
-                  ? 'bg-foreground text-background'
-                  : 'text-muted-foreground hover:text-foreground'
+                ? 'bg-foreground text-background'
+                : 'text-muted-foreground hover:text-foreground'
                 }`}
             >
               <Icon className="w-4 h-4" />
@@ -80,7 +84,10 @@ const MobileNav = ({ activeTab, onTabChange }: MobileNavProps) => {
         </div>
 
         {/* Right: FAB - AI Scanner */}
-        <button className="glass-pill p-5 glow-acid group">
+        <button
+          onClick={onScanOpen}
+          className="glass-pill p-5 glow-acid group shadow-[0_0_20px_rgba(var(--primary),0.3)]"
+        >
           <Camera className="w-6 h-6 text-drip-acid group-hover:scale-110 transition-transform" />
         </button>
       </div>

@@ -22,7 +22,7 @@ const FilterBar = () => {
       <CategoryTabs />
 
       {/* Bottom row: Sort + Result count */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 no-scrollbar">
         <SortControl />
         <div className="flex items-center gap-3">
           {hasActiveFilters && (

@@ -1,13 +1,15 @@
 import { Search, Bell, Camera, MapPin } from 'lucide-react';
 import ThemeToggle from './ThemeToggle';
 import { NavTab } from '@/pages/Index';
+import BrandLogo from './BrandLogo';
 
 interface DesktopNavProps {
   activeTab: NavTab;
   onTabChange: (tab: NavTab) => void;
+  onScanOpen: () => void;
 }
 
-const DesktopNav = ({ activeTab, onTabChange }: DesktopNavProps) => {
+const DesktopNav = ({ activeTab, onTabChange, onScanOpen }: DesktopNavProps) => {
   const items: { id: NavTab; label: string }[] = [
     { id: 'feed', label: 'Feed' },
     { id: 'map', label: 'Map' },
@@ -21,9 +23,7 @@ const DesktopNav = ({ activeTab, onTabChange }: DesktopNavProps) => {
         <div className="flex items-center justify-between px-8 py-4">
           {/* Logo */}
           <div className="flex items-center gap-6 cursor-pointer" onClick={() => onTabChange('feed')}>
-            <h1 className="font-editorial text-3xl font-bold text-foreground tracking-wider">
-              DRIP
-            </h1>
+            <BrandLogo className="h-8" />
             <span className="text-utility text-muted-foreground hidden lg:block">
               042 DIGITAL OKIRIKA
             </span>
@@ -36,8 +36,8 @@ const DesktopNav = ({ activeTab, onTabChange }: DesktopNavProps) => {
                 key={item.id}
                 onClick={() => onTabChange(item.id)}
                 className={`px-5 py-2 text-utility transition-all duration-300 relative ${activeTab === item.id
-                    ? 'text-primary'
-                    : 'text-muted-foreground hover:text-foreground'
+                  ? 'text-primary'
+                  : 'text-muted-foreground hover:text-foreground'
                   }`}
               >
                 {item.label}
@@ -61,8 +61,11 @@ const DesktopNav = ({ activeTab, onTabChange }: DesktopNavProps) => {
               <Bell className="w-4 h-4 text-foreground" />
               <span className="absolute top-1 right-1 w-2 h-2 rounded-full bg-drip-crimson animate-pulse-glow" />
             </button>
-            <button className="glass-pill px-4 py-2.5 flex items-center gap-2 glow-acid">
-              <Camera className="w-4 h-4 text-drip-acid" />
+            <button
+              onClick={onScanOpen}
+              className="glass-pill px-4 py-2.5 flex items-center gap-2 glow-acid group"
+            >
+              <Camera className="w-4 h-4 text-drip-acid group-hover:scale-110 transition-transform" />
               <span className="text-utility text-drip-acid">SCAN</span>
             </button>
             <ThemeToggle />

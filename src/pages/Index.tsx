@@ -10,12 +10,16 @@ import ProductGrid from '@/components/ProductGrid';
 import Footer from '@/components/Footer';
 import MapView from '@/components/MapView';
 import VaultView from '@/components/VaultView';
+import ScanModal from '@/components/ScanModal';
+
+import VendorsView from '@/components/VendorsView';
 
 export type NavTab = 'feed' | 'map' | 'vendors' | 'vault';
 
 const Index = () => {
   const isMobile = useIsMobile();
   const [activeTab, setActiveTab] = useState<NavTab>('feed');
+  const [isScanOpen, setIsScanOpen] = useState(false);
 
   const renderContent = () => {
     switch (activeTab) {
@@ -24,28 +28,30 @@ const Index = () => {
       case 'vault':
         return <VaultView />;
       case 'vendors':
-        return (
-          <div className="px-8 py-20 text-center animate-in fade-in">
-            <h2 className="font-editorial text-4xl mb-4">Market Vendors</h2>
-            <p className="text-muted-foreground">The digital directory of Enugu's finest thrift traders is coming soon.</p>
-          </div>
-        );
+        return <VendorsView />;
       case 'feed':
       default:
         return (
           <>
             <HeroEditorial />
-            <FeaturedDrops />
+            <div className="py-20">
+              <FeaturedDrops />
+            </div>
 
             {/* Full Catalog */}
-            <div className="mt-4">
-              <div className="px-4 md:px-8 mb-2">
-                <h2 className="font-editorial text-3xl md:text-5xl font-bold text-foreground">
-                  Shop All
+            <div className="mt-12">
+              <div className="px-4 md:px-8 mb-12 flex items-baseline justify-between">
+                <h2 className="font-editorial text-6xl md:text-9xl font-bold text-foreground tracking-tighter">
+                  The <span className="italic font-medium">Archive</span>
                 </h2>
+                <span className="text-utility text-muted-foreground hidden md:block tracking-[0.5em] uppercase text-[10px]">
+                  042 DIGITAL OKIRIKA // CURATED SPREAD
+                </span>
               </div>
               <FilterBar />
-              <ProductGrid />
+              <div className="mt-8">
+                <ProductGrid />
+              </div>
             </div>
           </>
         );
@@ -56,15 +62,25 @@ const Index = () => {
     <FilterProvider>
       <div className="min-h-screen bg-background text-foreground">
         {isMobile ? (
-          <MobileNav activeTab={activeTab as any} onTabChange={setActiveTab as any} />
+          <MobileNav
+            activeTab={activeTab}
+            onTabChange={setActiveTab}
+            onScanOpen={() => setIsScanOpen(true)}
+          />
         ) : (
-          <DesktopNav activeTab={activeTab} onTabChange={setActiveTab} />
+          <DesktopNav
+            activeTab={activeTab}
+            onTabChange={setActiveTab}
+            onScanOpen={() => setIsScanOpen(true)}
+          />
         )}
 
         <main className={isMobile ? 'pt-16 pb-28' : 'pt-24'}>
           {renderContent()}
           {activeTab === 'feed' && <Footer />}
         </main>
+
+        <ScanModal isOpen={isScanOpen} onClose={() => setIsScanOpen(false)} />
       </div>
     </FilterProvider>
   );

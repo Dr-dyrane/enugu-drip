@@ -17,11 +17,10 @@ const SortControl = () => {
         <button
           key={id}
           onClick={() => setSortBy(id)}
-          className={`glass-pill px-3 py-1.5 text-utility whitespace-nowrap transition-all duration-300 ${
-            sortBy === id
-              ? 'bg-foreground text-background'
-              : 'text-muted-foreground hover:text-foreground'
-          }`}
+          className={`glass-pill px-3 py-1.5 text-utility whitespace-nowrap transition-all duration-300 no-scrollbar ${sortBy === id
+            ? 'bg-foreground text-background'
+            : 'text-muted-foreground hover:text-foreground'
+            }`}
         >
           {label}
         </button>

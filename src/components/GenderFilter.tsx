@@ -17,11 +17,10 @@ const GenderFilter = () => {
         <button
           key={id}
           onClick={() => setGender(id)}
-          className={`px-4 py-2 text-utility transition-all duration-300 ${
-            gender === id
+          className={`px-4 py-2 text-utility transition-all duration-300 no-scrollbar ${gender === id
               ? 'text-primary'
               : 'text-muted-foreground hover:text-foreground'
-          }`}
+            }`}
         >
           {label}
         </button>
