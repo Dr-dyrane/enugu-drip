@@ -1,9 +1,11 @@
+import heroImage from '@/assets/hero-editorial.jpg';
+
 const HeroEditorial = () => {
   return (
     <div className="relative w-full h-[60vh] md:h-[70vh] overflow-hidden mb-2">
       {/* Hero Image */}
       <img
-        src="https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=1920&q=80"
+        src={heroImage}
         alt="DRIP Editorial"
         className="absolute inset-0 w-full h-full object-cover"
       />
