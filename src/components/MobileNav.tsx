@@ -120,7 +120,7 @@ const ProfileSection = () => (
     <div className="space-y-1">
       <p className="text-utility text-muted-foreground mb-3">QUICK LINKS</p>
       {['Saved Items', 'Order History', 'Nearby Vendors', 'Settings'].map((link) => (
-        <button key={link} className="w-full text-left py-3 text-sm text-foreground hover:text-primary transition-colors border-b border-secondary">
+        <button key={link} className="w-full text-left py-3 text-sm text-foreground hover:text-primary transition-colors">
           {link}
         </button>
       ))}
