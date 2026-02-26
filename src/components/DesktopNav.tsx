@@ -1,13 +1,26 @@
 import { Search, Bell, Camera, MapPin } from 'lucide-react';
 import ThemeToggle from './ThemeToggle';
+import { NavTab } from '@/pages/Index';
 
-const DesktopNav = () => {
+interface DesktopNavProps {
+  activeTab: NavTab;
+  onTabChange: (tab: NavTab) => void;
+}
+
+const DesktopNav = ({ activeTab, onTabChange }: DesktopNavProps) => {
+  const items: { id: NavTab; label: string }[] = [
+    { id: 'feed', label: 'Feed' },
+    { id: 'map', label: 'Map' },
+    { id: 'vendors', label: 'Vendors' },
+    { id: 'vault', label: 'Vault' },
+  ];
+
   return (
     <nav className="fixed top-0 left-0 right-0 z-50">
       <div className="glass-pane-sm">
         <div className="flex items-center justify-between px-8 py-4">
           {/* Logo */}
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-6 cursor-pointer" onClick={() => onTabChange('feed')}>
             <h1 className="font-editorial text-3xl font-bold text-foreground tracking-wider">
               DRIP
             </h1>
@@ -18,16 +31,19 @@ const DesktopNav = () => {
 
           {/* Center Nav */}
           <div className="flex items-center gap-1">
-            {['Feed', 'Map', 'Vendors', 'Vault'].map((item, i) => (
+            {items.map((item) => (
               <button
-                key={item}
-                className={`px-5 py-2 text-utility transition-all duration-300 ${
-                  i === 0
+                key={item.id}
+                onClick={() => onTabChange(item.id)}
+                className={`px-5 py-2 text-utility transition-all duration-300 relative ${activeTab === item.id
                     ? 'text-primary'
                     : 'text-muted-foreground hover:text-foreground'
-                }`}
+                  }`}
               >
-                {item}
+                {item.label}
+                {activeTab === item.id && (
+                  <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-primary glow-acid" />
+                )}
               </button>
             ))}
           </div>

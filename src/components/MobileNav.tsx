@@ -1,5 +1,5 @@
-import { Map, LayoutGrid, Archive, Camera, Search, Bell, Menu, User } from 'lucide-react';
-import { useState } from 'react';
+import { Map, LayoutGrid, Archive, Camera, Search, Bell, Menu, User, ShieldCheck, Database, BarChart3, Settings } from 'lucide-react';
+import { NavTab } from '@/pages/Index';
 import {
   Sheet,
   SheetContent,
@@ -7,8 +7,6 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@/components/ui/sheet';
-
-type NavTab = 'map' | 'feed' | 'vault';
 
 interface MobileNavProps {
   activeTab: NavTab;
@@ -28,11 +26,11 @@ const MobileNav = ({ activeTab, onTabChange }: MobileNavProps) => {
                 <Menu className="w-5 h-5 text-foreground" />
               </button>
             </SheetTrigger>
-            <SheetContent side="left" className="bg-background/95 backdrop-blur-xl w-80">
-              <SheetHeader>
-                <SheetTitle className="font-editorial text-2xl text-foreground">DRIP</SheetTitle>
-              </SheetHeader>
-              <div className="mt-8 space-y-6">
+            <SheetContent side="left" className="bg-background/95 backdrop-blur-xl w-80 border-none p-0 overflow-y-auto">
+              <div className="p-6">
+                <SheetHeader className="mb-8">
+                  <SheetTitle className="font-editorial text-3xl text-foreground text-left">DRIP</SheetTitle>
+                </SheetHeader>
                 <ProfileSection />
               </div>
             </SheetContent>
@@ -40,7 +38,7 @@ const MobileNav = ({ activeTab, onTabChange }: MobileNavProps) => {
         </div>
 
         {/* Center: Logo */}
-        <h1 className="font-editorial text-xl font-bold text-foreground tracking-wider">
+        <h1 className="font-editorial text-xl font-bold text-foreground tracking-wider" onClick={() => onTabChange('feed')}>
           DRIP
         </h1>
 
@@ -68,11 +66,10 @@ const MobileNav = ({ activeTab, onTabChange }: MobileNavProps) => {
             <button
               key={id}
               onClick={() => onTabChange(id)}
-              className={`flex items-center gap-1.5 px-4 py-2.5 rounded-full transition-all duration-300 ${
-                activeTab === id
+              className={`flex items-center gap-1.5 px-4 py-2.5 rounded-full transition-all duration-300 ${activeTab === id
                   ? 'bg-foreground text-background'
                   : 'text-muted-foreground hover:text-foreground'
-              }`}
+                }`}
             >
               <Icon className="w-4 h-4" />
               {activeTab === id && (
@@ -92,36 +89,60 @@ const MobileNav = ({ activeTab, onTabChange }: MobileNavProps) => {
 };
 
 const ProfileSection = () => (
-  <div className="space-y-6">
+  <div className="space-y-8 pb-12">
     <div className="flex items-center gap-4">
-      <div className="w-14 h-14 rounded-full bg-secondary flex items-center justify-center">
-        <User className="w-7 h-7 text-muted-foreground" />
+      <div className="w-16 h-16 rounded-full bg-secondary flex items-center justify-center relative overflow-hidden ring-1 ring-foreground/5">
+        <User className="w-8 h-8 text-muted-foreground" />
       </div>
       <div>
-        <p className="font-editorial text-lg text-foreground">Guest User</p>
-        <p className="text-utility text-muted-foreground">Set up your profile</p>
+        <p className="font-editorial text-xl text-foreground">Guest User</p>
+        <p className="text-utility text-muted-foreground">Level 1 Stalker</p>
       </div>
     </div>
 
-    <div className="space-y-1">
-      <p className="text-utility text-muted-foreground mb-3">BODY FEATURES</p>
+    {/* Body Features (Gradual Reveal Style) */}
+    <div className="space-y-4">
+      <p className="text-utility text-muted-foreground border-b border-foreground/5 pb-2">BODY FEATURES</p>
       {[
         { label: 'Height', value: 'Not set' },
         { label: 'Build', value: 'Not set' },
         { label: 'Shoulders', value: 'Not set' },
       ].map(({ label, value }) => (
-        <div key={label} className="flex justify-between py-3 border-b-0">
-          <span className="text-sm text-foreground">{label}</span>
-          <span className="text-sm text-muted-foreground">{value}</span>
+        <div key={label} className="flex justify-between items-center py-1">
+          <span className="text-sm text-foreground/70">{label}</span>
+          <span className="text-xs text-muted-foreground font-mono bg-secondary/50 px-2 py-1 rounded">{value}</span>
         </div>
       ))}
     </div>
 
-    <div className="space-y-1">
-      <p className="text-utility text-muted-foreground mb-3">QUICK LINKS</p>
-      {['Saved Items', 'Order History', 'Nearby Vendors', 'Settings'].map((link) => (
-        <button key={link} className="w-full text-left py-3 text-sm text-foreground hover:text-primary transition-colors">
-          {link}
+    {/* Admin Portal (New Section) */}
+    <div className="space-y-4">
+      <p className="text-utility text-primary/80 border-b border-primary/10 pb-2 flex items-center gap-2">
+        <ShieldCheck className="w-3 h-3" /> ADMIN PORTAL
+      </p>
+      {[
+        { label: 'Drop Management', icon: Database },
+        { label: 'Vendor Verifier', icon: ShieldCheck },
+        { label: 'Market Analytics', icon: BarChart3 },
+      ].map(({ label, icon: Icon }) => (
+        <button key={label} className="w-full flex items-center gap-3 py-2 text-sm text-foreground/80 hover:text-primary transition-colors group">
+          <Icon className="w-4 h-4 text-muted-foreground group-hover:text-primary" />
+          {label}
+        </button>
+      ))}
+    </div>
+
+    {/* Quick Links */}
+    <div className="space-y-4">
+      <p className="text-utility text-muted-foreground border-b border-foreground/5 pb-2">QUICK LINKS</p>
+      {[
+        { label: 'Saved Items', icon: Archive },
+        { label: 'Order History', icon: LayoutGrid },
+        { label: 'Settings', icon: Settings },
+      ].map(({ label, icon: Icon }) => (
+        <button key={label} className="w-full flex items-center gap-3 py-2 text-sm text-foreground/80 hover:text-foreground transition-colors group">
+          <Icon className="w-4 h-4 text-muted-foreground group-hover:text-foreground" />
+          {label}
         </button>
       ))}
     </div>
