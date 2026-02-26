@@ -110,7 +110,7 @@ const ProfileSection = () => (
         { label: 'Build', value: 'Not set' },
         { label: 'Shoulders', value: 'Not set' },
       ].map(({ label, value }) => (
-        <div key={label} className="flex justify-between py-3 border-b border-secondary">
+        <div key={label} className="flex justify-between py-3 border-b-0">
           <span className="text-sm text-foreground">{label}</span>
           <span className="text-sm text-muted-foreground">{value}</span>
         </div>
