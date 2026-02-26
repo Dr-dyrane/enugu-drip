@@ -15,7 +15,7 @@ const ProductGrid = () => {
 
   return (
     <div className="px-2 md:px-8">
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-2">
         {filtered.map((product, i) => (
           <div
             key={product.id}

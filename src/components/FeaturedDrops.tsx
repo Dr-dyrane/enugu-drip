@@ -18,7 +18,7 @@ const FeaturedDrops = () => {
         </button>
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-2">
         {featured.map((product, i) => (
           <div
             key={product.id}
