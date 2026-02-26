@@ -28,7 +28,7 @@ const MobileNav = ({ activeTab, onTabChange }: MobileNavProps) => {
                 <Menu className="w-5 h-5 text-foreground" />
               </button>
             </SheetTrigger>
-            <SheetContent side="left" className="bg-background/95 backdrop-blur-xl border-none w-80">
+            <SheetContent side="left" className="bg-background/95 backdrop-blur-xl w-80">
               <SheetHeader>
                 <SheetTitle className="font-editorial text-2xl text-foreground">DRIP</SheetTitle>
               </SheetHeader>
