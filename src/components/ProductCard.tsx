@@ -1,4 +1,5 @@
 import { Product, statusConfig } from '@/data/products';
+import { useApp } from '@/context/AppContext';
 
 interface ProductCardProps {
   product: Product;
@@ -6,6 +7,7 @@ interface ProductCardProps {
 }
 
 const ProductCard = ({ product, variant = 'standard' }: ProductCardProps) => {
+  const { setSelectedProduct } = useApp();
   const status = statusConfig[product.status];
 
   // Billboard variants get massive heights on mobile for impact
@@ -16,7 +18,10 @@ const ProductCard = ({ product, variant = 'standard' }: ProductCardProps) => {
       : 'h-[500px] md:h-[440px]';
 
   return (
-    <div className={`group relative overflow-hidden ${heightClass} cursor-pointer bg-background border-none`}>
+    <div
+      className={`group relative overflow-hidden ${heightClass} cursor-pointer bg-background border-none`}
+      onClick={() => setSelectedProduct(product)}
+    >
       {/* Editorial Image Layer */}
       <div
         className="absolute inset-0 z-0 transition-transform duration-1000 ease-out group-hover:scale-105"
@@ -30,7 +35,7 @@ const ProductCard = ({ product, variant = 'standard' }: ProductCardProps) => {
           className="absolute inset-0 w-full h-full object-cover"
         />
         {/* Billboard Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-black/20" />
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/50" />
       </div>
 
       {/* Floating Status Accent - Rule 7: Color has meaning */}
@@ -74,7 +79,7 @@ const ProductCard = ({ product, variant = 'standard' }: ProductCardProps) => {
             </div>
           </div>
 
-          <div className="mt-6 flex items-center justify-between border-t border-white/10 pt-4">
+          <div className="mt-6 flex items-center justify-between border-t border-foreground/10 pt-4">
             <span className="text-[11px] tracking-widest text-muted-foreground uppercase">
               // 📍 {product.location}
             </span>
@@ -90,7 +95,7 @@ const ProductCard = ({ product, variant = 'standard' }: ProductCardProps) => {
       </div>
 
       {/* Subtle Depth Scanline Effect */}
-      <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(hsla(0,0%,100%,0.03)_1px,transparent_1px)] bg-[length:100%_4px] opacity-20" />
+      <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(hsla(var(--foreground),0.1)_1px,transparent_1px)] bg-[length:100%_4px] opacity-20" />
 
       {/* Interaction Trigger Overlay */}
       <div className="absolute inset-0 z-30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-background/10 backdrop-blur-[2px]">

@@ -13,6 +13,7 @@ import VaultView from '@/components/VaultView';
 import ScanModal from '@/components/ScanModal';
 
 import VendorsView from '@/components/VendorsView';
+import { ProductReveal } from '@/components/ProductReveal';
 
 export type NavTab = 'feed' | 'map' | 'vendors' | 'vault';
 
@@ -75,12 +76,15 @@ const Index = () => {
           />
         )}
 
-        <main className={isMobile ? 'pt-16 pb-28' : 'pt-24'}>
+        <main className={isMobile
+          ? (activeTab === 'map' ? '' : 'pt-16 pb-28')
+          : (activeTab === 'map' ? '' : 'pt-24')}>
           {renderContent()}
           {activeTab === 'feed' && <Footer />}
         </main>
 
         <ScanModal isOpen={isScanOpen} onClose={() => setIsScanOpen(false)} />
+        <ProductReveal />
       </div>
     </FilterProvider>
   );

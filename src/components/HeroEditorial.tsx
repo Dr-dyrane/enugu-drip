@@ -51,8 +51,8 @@ const HeroEditorial = () => {
       </div>
 
       {/* Vertical Scanline Decoration */}
-      <div className="absolute top-0 right-12 bottom-0 w-px bg-white/5 hidden md:block" />
-      <div className="absolute top-0 right-24 bottom-0 w-px bg-white/5 hidden lg:block" />
+      <div className="absolute top-0 right-12 bottom-0 w-px bg-foreground/10 hidden md:block" />
+      <div className="absolute top-0 right-24 bottom-0 w-px bg-foreground/5 hidden lg:block" />
     </div>
   );
 };

@@ -10,7 +10,7 @@ const FeaturedDrops = () => {
         <h2 className="font-editorial text-5xl md:text-7xl font-bold text-foreground tracking-tighter">
           The New <span className="italic font-medium">Drops</span>
         </h2>
-        <div className="h-px flex-1 bg-white/10 hidden md:block" />
+        <div className="h-px flex-1 bg-foreground/10 hidden md:block" />
         <button className="text-utility text-primary font-bold tracking-[0.2em] hover:text-foreground transition-colors uppercase">
           [ ARCHIVE ]
         </button>

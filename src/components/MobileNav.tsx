@@ -1,4 +1,5 @@
-import { Map, LayoutGrid, Archive, Camera, Search, Bell, Menu, User, ShieldCheck, Database, BarChart3, Settings } from 'lucide-react';
+import { Map, LayoutGrid, Archive, Camera, Search, Bell, Menu, User, ShieldCheck, Database, BarChart3, Settings, Sun, Moon } from 'lucide-react';
+import { useTheme } from 'next-themes';
 import { NavTab } from '@/pages/Index';
 import {
   Sheet,
@@ -95,65 +96,84 @@ const MobileNav = ({ activeTab, onTabChange, onScanOpen }: MobileNavProps) => {
   );
 };
 
-const ProfileSection = () => (
-  <div className="space-y-8 pb-12">
-    <div className="flex items-center gap-4">
-      <div className="w-16 h-16 rounded-full bg-secondary flex items-center justify-center relative overflow-hidden ring-1 ring-foreground/5">
-        <User className="w-8 h-8 text-muted-foreground" />
-      </div>
-      <div>
-        <p className="font-editorial text-xl text-foreground">Guest User</p>
-        <p className="text-utility text-muted-foreground">Level 1 Stalker</p>
-      </div>
-    </div>
+const ProfileSection = () => {
+  const { theme, setTheme } = useTheme();
 
-    {/* Body Features (Gradual Reveal Style) */}
-    <div className="space-y-4">
-      <p className="text-utility text-muted-foreground border-b border-foreground/5 pb-2">BODY FEATURES</p>
-      {[
-        { label: 'Height', value: 'Not set' },
-        { label: 'Build', value: 'Not set' },
-        { label: 'Shoulders', value: 'Not set' },
-      ].map(({ label, value }) => (
-        <div key={label} className="flex justify-between items-center py-1">
-          <span className="text-sm text-foreground/70">{label}</span>
-          <span className="text-xs text-muted-foreground font-mono bg-secondary/50 px-2 py-1 rounded">{value}</span>
+  return (
+    <div className="space-y-8 pb-12">
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-4">
+          <div className="w-16 h-16 rounded-full bg-secondary flex items-center justify-center relative overflow-hidden ring-1 ring-foreground/5">
+            <User className="w-8 h-8 text-muted-foreground" />
+          </div>
+          <div>
+            <p className="font-editorial text-xl text-foreground">Guest User</p>
+            <p className="text-utility text-muted-foreground">Level 1 Stalker</p>
+          </div>
         </div>
-      ))}
-    </div>
 
-    {/* Admin Portal (New Section) */}
-    <div className="space-y-4">
-      <p className="text-utility text-primary/80 border-b border-primary/10 pb-2 flex items-center gap-2">
-        <ShieldCheck className="w-3 h-3" /> ADMIN PORTAL
-      </p>
-      {[
-        { label: 'Drop Management', icon: Database },
-        { label: 'Vendor Verifier', icon: ShieldCheck },
-        { label: 'Market Analytics', icon: BarChart3 },
-      ].map(({ label, icon: Icon }) => (
-        <button key={label} className="w-full flex items-center gap-3 py-2 text-sm text-foreground/80 hover:text-primary transition-colors group">
-          <Icon className="w-4 h-4 text-muted-foreground group-hover:text-primary" />
-          {label}
+        {/* Toggle UI */}
+        <button
+          onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+          className="glass-pill p-3 hover:scale-105 transition-transform active:scale-95"
+          aria-label="Toggle theme"
+        >
+          {theme === 'dark' ? (
+            <Sun className="w-5 h-5 text-primary animate-in zoom-in duration-300" />
+          ) : (
+            <Moon className="w-5 h-5 text-primary animate-in zoom-in duration-300" />
+          )}
         </button>
-      ))}
-    </div>
+      </div>
 
-    {/* Quick Links */}
-    <div className="space-y-4">
-      <p className="text-utility text-muted-foreground border-b border-foreground/5 pb-2">QUICK LINKS</p>
-      {[
-        { label: 'Saved Items', icon: Archive },
-        { label: 'Order History', icon: LayoutGrid },
-        { label: 'Settings', icon: Settings },
-      ].map(({ label, icon: Icon }) => (
-        <button key={label} className="w-full flex items-center gap-3 py-2 text-sm text-foreground/80 hover:text-foreground transition-colors group">
-          <Icon className="w-4 h-4 text-muted-foreground group-hover:text-foreground" />
-          {label}
-        </button>
-      ))}
+      {/* Body Features (Gradual Reveal Style) */}
+      <div className="space-y-4">
+        <p className="text-utility text-muted-foreground border-b border-foreground/5 pb-2">BODY FEATURES</p>
+        {[
+          { label: 'Height', value: 'Not set' },
+          { label: 'Build', value: 'Not set' },
+          { label: 'Shoulders', value: 'Not set' },
+        ].map(({ label, value }) => (
+          <div key={label} className="flex justify-between items-center py-1">
+            <span className="text-sm text-foreground/70">{label}</span>
+            <span className="text-xs text-muted-foreground font-mono bg-secondary/50 px-2 py-1 rounded">{value}</span>
+          </div>
+        ))}
+      </div>
+
+      {/* Admin Portal (New Section) */}
+      <div className="space-y-4">
+        <p className="text-utility text-primary/80 border-b border-primary/10 pb-2 flex items-center gap-2">
+          <ShieldCheck className="w-3 h-3" /> ADMIN PORTAL
+        </p>
+        {[
+          { label: 'Drop Management', icon: Database },
+          { label: 'Vendor Verifier', icon: ShieldCheck },
+          { label: 'Market Analytics', icon: BarChart3 },
+        ].map(({ label, icon: Icon }) => (
+          <button key={label} className="w-full flex items-center gap-3 py-2 text-sm text-foreground/80 hover:text-primary transition-colors group">
+            <Icon className="w-4 h-4 text-muted-foreground group-hover:text-primary" />
+            {label}
+          </button>
+        ))}
+      </div>
+
+      {/* Quick Links */}
+      <div className="space-y-4">
+        <p className="text-utility text-muted-foreground border-b border-foreground/5 pb-2">QUICK LINKS</p>
+        {[
+          { label: 'Saved Items', icon: Archive },
+          { label: 'Order History', icon: LayoutGrid },
+          { label: 'Settings', icon: Settings },
+        ].map(({ label, icon: Icon }) => (
+          <button key={label} className="w-full flex items-center gap-3 py-2 text-sm text-foreground/80 hover:text-foreground transition-colors group">
+            <Icon className="w-4 h-4 text-muted-foreground group-hover:text-foreground" />
+            {label}
+          </button>
+        ))}
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 export default MobileNav;

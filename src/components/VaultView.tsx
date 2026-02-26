@@ -28,7 +28,7 @@ const VaultView = () => {
                     >
                         {/* Scarcity Indicator */}
                         <div className="absolute -top-2 -right-2 z-30">
-                            <div className="bg-drip-crimson text-white text-[10px] px-2 py-1 rotate-12 glow-crimson font-bold">
+                            <div className="bg-drip-crimson text-white dark:text-white text-[10px] px-2 py-1 rotate-12 glow-crimson font-bold">
                                 ONLY 1
                             </div>
                         </div>
